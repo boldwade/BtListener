@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
@@ -22,14 +23,33 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="2147483647">
-                <action android:name="android.bluetooth.headset.action.VENDOR_SPECIFIC_HEADSET_EVENT" />
-                <action android:name="android.intent.extra.KEY_EVENT" />
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
-                <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED" />
+                <action android:name="android.bluetooth.headset.action.VENDOR_SPECIFIC_HEADSET_EVENT" />
+                <action android:name="android.intent.action.CAMERA_BUTTON" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.intent.extra.KEY_EVENT" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name="androidx.media.session.MediaButtonReceiver" >
+            <intent-filter>
+                <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
+                <action android:name="android.bluetooth.headset.action.VENDOR_SPECIFIC_HEADSET_EVENT" />
+                <action android:name="android.intent.action.CAMERA_BUTTON" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.intent.extra.KEY_EVENT" />
+            </intent-filter>
+        </receiver>
+
+<!--        <service android:name=".MediaPlaybackService" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
 
         <activity android:name=".MainActivity">
             <intent-filter>
